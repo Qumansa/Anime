@@ -4,37 +4,43 @@
     &__container
         display: grid
         grid-template-columns: repeat(2, 1fr)
-    &__info
+    .info
         display: grid
-        grid-template-columns: 200px auto
+        grid-template-columns: auto auto
         justify-content: space-between
         column-gap: 30px
         padding: 35px 40px
         box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25)
-        &-img
+        &__img
+            display: flex
             max-width: 200px
-            max-height: 200px
-            object-fit: contain
-        &-title
+            max-height: 240px
+            object-fit: cover
+        &__title
             font-size: 22px
             line-height: 30px
             font-weight: 700
-        &-text
-            margin-top: 10px
+            &-text
+                display: block
+        &__descr
+            margin-top: 20px
     &__try
         padding: 35px 40px
-        background: url('../../resources/img/totoro.png') 90% center / cover no-repeat
-        background-size: 40% 90%
+        background-image: url('../../resources/img/try-it.png') 
+        background-repeat: no-repeat
+        background-position: bottom right
+        background-size: 50% 90%
         background-color: $dodgerBlue
         box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25)
         &-text
             display: block
+            max-width: 300px
             font-size: 24px
             line-height: 32px
             font-weight: 700
             color: $white
             &_choose
-                margin-top: 35px
+                margin-top: 60px
         &-btn
             margin-top: 30px
             padding: 5px 25px
