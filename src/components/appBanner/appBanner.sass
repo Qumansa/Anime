@@ -1,0 +1,29 @@
+@import '../../style/_variables'
+    
+.banner
+    &__container
+        position: relative
+        display: flex
+        flex-direction: column
+        justify-content: center
+        gap: 20px
+        padding: 0
+        height: 300px
+        background: url('../../resources/img/banner.jpg') 50% 28%/cover no-repeat
+        &::after
+            content: ''
+            position: absolute
+            inset: 0
+            background-color: rgba(0, 0, 0, 0.65)
+    &__text
+        position: relative
+        display: inline-block
+        margin: 0 auto
+        width: 100%
+        font-weight: 700
+        font-size: 42px
+        line-height: 52px
+        color: $white
+        text-align: center
+        z-index: 1
+        
