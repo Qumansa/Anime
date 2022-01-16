@@ -4,7 +4,7 @@ import '../../style/_base.sass';
 
 import AppHeader from "../appHeader/AppHeader";
 import MainPage from "../pages/MainPage";
-import Films from "../pages/Films";
+import FilmsPage from "../pages/FilmsPage";
 
 const App = () => {
 	return (
@@ -12,7 +12,7 @@ const App = () => {
 			<AppHeader/>
 			<Routes>
 				<Route path="/" element={<MainPage/>}/>
-				<Route path="/films" element={<Films/>}/>
+				<Route path="/films" element={<FilmsPage/>}/>
 			</Routes>
 		</Router>
 	);

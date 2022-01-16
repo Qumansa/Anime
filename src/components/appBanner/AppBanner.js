@@ -1,10 +1,8 @@
 import './appBanner.sass';
 
-// import banner from '../../resources/img/banner'
-
 const AppBanner = (props) => {
     const {title} = props;
-    
+
     return (
         <section className="banner section">
             <h2 className="sr-only">Banner</h2>

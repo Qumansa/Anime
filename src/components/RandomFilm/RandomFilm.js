@@ -1,13 +1,15 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import useGhibliService from '../../service/GhibliService';
+import Spinner from '../spinner/Spinner';
+import ErrorMessage from '../errorMessage/ErrorMessage';
 
 import './randomFilm.sass';
 
 let idsList = [];
 
 const RandomFilm = () => {
-    const {getFilm, getFilmsList, getIdsList} = useGhibliService(); 
+    const {error, getFilm, getFilmsList, getIdsList, loading} = useGhibliService(); 
     const [film, setFilm] = useState({});
     // const [idsList, setIdsList] = useState(null);
     
@@ -20,7 +22,6 @@ const RandomFilm = () => {
 
     const updateFilm = () => {
         if (idsList.length <= 0) {
-            // console.log('перезаписываю idslist');
             getFilmsList()
                 .then((filmsList) => {
                     idsList = filmsList.map(film => film.id);
@@ -49,21 +50,35 @@ const RandomFilm = () => {
 
     const {description, image, originalTitle, title} = film;
 
+    const View = () => {
+        return (
+            <>
+                <a href="#" className="info__link">
+                    <img src={image} alt={title} className="info__img"/>
+                </a>
+                <div className="info__main">
+                    <h3 className="info__title">
+                        <span className="info__title-text info__title-text_eng">{title}</span>
+                        <span className="info__title-text info__title-text_jp">{originalTitle}</span>
+                    </h3>
+                    <p className="info__descr">{description}</p>
+                </div>
+            </>
+        );
+    };
+
+    const errorMessage = error ? <ErrorMessage/> : null;
+    const spinner = loading ? <Spinner/> : null;
+    const content = !(loading) && !(error) ? <View/> : null;
+
     return (    
         <div className="random section">
-            <h2 className="sr-only">Choose a film</h2>
+            <h2 className="sr-only">Random film</h2>
             <div className="random__container container">
                 <article className="info">
-                    <a href="#" className="info__link">
-                        <img src={image} alt={title} className="info__img"/>
-                    </a>
-                    <div className="info__main">
-                        <h3 className="info__title">
-                            <span className="info__title-text info__title-text_eng">{title}</span>
-                            <span className="info__title-text info__title-text_jp">{originalTitle}</span>
-                        </h3>
-                        <p className="info__descr">{description}</p>
-                    </div>
+                    {errorMessage}
+                    {spinner}
+                    {content}
                 </article>
                 <div className="random__try">
                     <span className="random__try-text">Random anime for today!</span>
@@ -74,7 +89,6 @@ const RandomFilm = () => {
                         // >
                         onClick={updateFilm}>
                         Try it!
-                        
                     </button>
                 </div>
             </div>
