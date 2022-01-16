@@ -17,6 +17,13 @@ const useGhibliService = () => {
         return res;
     };
 
+    const getIdsList = async () => {
+        const res = await getFilmsList()
+            .then(filmsList => filmsList.map(film => film.id));
+
+        return res;
+    };
+
     const getPeople = async () => {
         const res = await request(`${_apiBase}people`);
 
@@ -40,7 +47,8 @@ const useGhibliService = () => {
         process, 
         setProcess,
         getFilm,
-        getFilmsList, 
+        getFilmsList,
+        getIdsList,
         getPeople,
     };
 };

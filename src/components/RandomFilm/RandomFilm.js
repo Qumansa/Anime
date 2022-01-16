@@ -2,32 +2,42 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import useGhibliService from '../../service/GhibliService';
 
-import filmImg from '../../resources/img/test.jpeg';
-import './randomFilm.sass'
+import './randomFilm.sass';
+
+let idsList = [];
 
 const RandomFilm = () => {
-    const {getFilm, getFilmsList} = useGhibliService(); 
+    const {getFilm, getFilmsList, getIdsList} = useGhibliService(); 
     const [film, setFilm] = useState({});
-    // const [idsList, setIdsList] = useState([]);
-
+    // const [idsList, setIdsList] = useState(null);
+    
+    // ХОТЬ КАКОЙ-ТО РАБОЧИЙ ВАРИАНТ.
+    // 1) Без state idsList. Переменная idsList вынесена за компонент. 
+    // 2) idsList записывается один раз. запрос getFilmsList() совершается один раз
     useEffect(() => { 
         updateFilm();
     }, []);
 
     const updateFilm = () => {
-        getFilmsList()
-            .then(onFilmsListLoaded)
-    };
+        if (idsList.length <= 0) {
+            // console.log('перезаписываю idslist');
+            getFilmsList()
+                .then((filmsList) => {
+                    idsList = filmsList.map(film => film.id);
 
-    const onFilmsListLoaded = (filmsList) => {
-        let idsList = [];
-
-        filmsList.forEach(film => {
-            idsList.push(film.id);
-        });
-
-        getFilm(getRandomId(idsList))
-            .then(onFilmLoaded)
+                    getFilm(getRandomId(idsList))
+                        .then((film) => {
+                            // console.log('устанавливаю film')
+                            setFilm(film);
+                        });
+                })
+        } else {
+            getFilm(getRandomId(idsList))
+                .then((film) => {
+                    // console.log('устанавливаю film')
+                    setFilm(film);
+                });
+        }
     };
 
     const getRandomId = (arr) => {
@@ -35,110 +45,7 @@ const RandomFilm = () => {
         return arr[random];
     };
 
-    const onFilmLoaded = (film) => {
-        setFilm(film);
-    };
-
-
-
-
-    
-
-    // useEffect(() => { 
-    //     updateFilm();
-    // }, []);
-
-    // const updateFilm = () => {
-    //     getFilm(getRandomId(idsList))
-    //         .then(onFilmLoaded)
-    // };
-
-    // const getRandomId = (arr) => {
-    //     let random = Math.floor(Math.random() * arr.length);
-    //     return arr[random];
-    // };
-
-    // const onFilmLoaded = (film) => {
-    //     setFilm(film);
-    // };
-
-    // useEffect(() => { 
-    //     updateIdsList();
-    // }, [updateIdsList]);
-
-    // const updateIdsList = () => {
-    //     getFilmsList()
-    //         .then(onFilmsListLoaded)
-    // };
-
-    // const onFilmsListLoaded = (filmsList) => {
-    //     let arr = [];
-
-    //     filmsList.map(film => {
-    //         return arr.push(film.id);
-    //     });  
-
-    //     console.log(arr)
-
-    //     setIdsList([...arr]);
-
-    //     console.log(idsList)
-    // };
-
-
-
-
     // ПОПЫТКА СОЗДАТЬ КОЛЛБЕК
-    // let idsList = [];
-
-    // const getIdsList = (filmsList) => {
-    //     let arr = [];
-
-    //     filmsList.map(film => {
-    //         return arr.push(film.id);
-    //     });
-
-    //     return arr;
-    // };
-
-    // const onFilmsListLoaded = (filmsList) => {
-    //     idsList = getIdsList(filmsList);
-    // };
-    
-    // const updateIdsList = () => {
-    //     getFilmsList()
-    //         .then(onFilmsListLoaded)
-    // };
-
-    // useEffect(() => { 
-    //     updateIdsList();
-    // }, []);
-
-    // const onFilmLoaded = (film) => {
-    //     setFilm(film);
-    // };
-
-    // const getRandomId = (arr) => {
-    //     let random = Math.floor(Math.random() * arr.length);
-    //     return arr[random];
-    // };
-
-    // const updateFilm = () => {
-    //     getFilm(getRandomId(idsList))
-    //         .then(onFilmLoaded)
-    // };
-
-    // useEffect(() => { 
-    //     updateFilm();
-    // }, []);
-
-    
-
-
-
-
-
-    
 
     const {description, image, originalTitle, title} = film;
 
@@ -164,6 +71,7 @@ const RandomFilm = () => {
                     <span className="random__try-text random__try-text_choose">Or choose another one</span>
                     <button 
                         className="random__try-btn"
+                        // >
                         onClick={updateFilm}>
                         Try it!
                         
