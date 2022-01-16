@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 
 import useGhibliService from '../../service/GhibliService';
 import Spinner from '../spinner/Spinner';
@@ -53,9 +54,9 @@ const RandomFilm = () => {
     const View = () => {
         return (
             <>
-                <a href="#" className="info__link">
+                <Link to="/film" className="info__link">
                     <img src={image} alt={title} className="info__img"/>
-                </a>
+                </Link>
                 <div className="info__main">
                     <h3 className="info__title">
                         <span className="info__title-text info__title-text_eng">{title}</span>

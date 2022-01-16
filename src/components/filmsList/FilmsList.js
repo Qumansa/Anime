@@ -29,7 +29,7 @@ const FilmsList = () => {
             return (
                 <li 
                     className="films__item"
-                    key={i}>
+                    key={film.id}>
                     <Link to={`/film`}>
                         <img src={film.image} alt={film.title} className="films__img"/>
                         <h3 className="films__title">
