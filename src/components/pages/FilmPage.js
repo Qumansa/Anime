@@ -3,7 +3,7 @@ import AppBanner from "../appBanner/AppBanner";
 const FilmPage = () => {
     return (
         <>
-            <AppBanner/>
+            <AppBanner title={'detailed information about every Ghibli anime!'}/>
         </>
     );
 };
