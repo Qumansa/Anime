@@ -1,0 +1,39 @@
+@import '../../style/_variables'
+@import '../../style/_mixins'
+    
+.film
+    &__wrapper
+        display: flex
+        column-gap: 50px
+    &__img
+        max-width: 300px
+        width: 100%
+        max-height: 450px
+        object-fit: cover
+        object-position: top
+    &__header
+        display: flex
+        justify-content: space-between
+        align-items: baseline
+        column-gap: 15px
+    &__back
+        @include navLink
+    &__title
+        &-text
+            display: block
+            font-size: 28px
+            line-height: 36px
+            font-weight: 700
+            text-transform: uppercase
+    &__info
+        margin-top: 15px
+        &-item
+            font-size: 20px
+            line-height: 28px
+            font-weight: bold
+    &__value
+        color: $dodgerBlue
+    &__descr
+        margin-top: 30px
+        font-size: 18px
+        line-height: 26px

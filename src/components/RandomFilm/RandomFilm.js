@@ -51,6 +51,10 @@ const RandomFilm = () => {
 
     const {description, image, originalTitle, title} = film;
 
+    const shortDescription = description && description.length > 225 
+        ? `${description.slice(0, 225)}...` 
+        : description;
+
     const View = () => {
         return (
             <>
@@ -62,7 +66,7 @@ const RandomFilm = () => {
                         <span className="info__title-text info__title-text_eng">{title}</span>
                         <span className="info__title-text info__title-text_jp">{originalTitle}</span>
                     </h3>
-                    <p className="info__descr">{description}</p>
+                    <p className="info__descr">{shortDescription}</p>
                 </div>
             </>
         );

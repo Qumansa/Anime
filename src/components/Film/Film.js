@@ -1,31 +1,99 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import useGhibliService from '../../service/GhibliService';
+import Spinner from '../spinner/Spinner';
+import ErrorMessage from '../errorMessage/ErrorMessage';
+
+import './film.sass';
 
 const Film = () => {
-    const [film, setFilm] = useState(null);
+    const {error, getFilm, loading} = useGhibliService();
+    const [film, setFilm] = useState({});
 
-    const {getFilm, getFilmsList, getPeople} = useGhibliService();
+    const onFilmLoaded = (film) => {
+        setFilm(film);
+    };
+
+    const updateFilm = () => {
+        getFilm('2baf70d1-42bb-4437-b551-e5fed5a87abe')
+            .then(onFilmLoaded);
+    };
 
     useEffect(() => {
         updateFilm();
     }, []);
 
-    const updateFilm = () => {
-        getFilmsList()
-            .then(onFilmLoaded);
+    const {description, director, image, originalTitle, producer, releaseDate, runningTime, rating, title} = film;
 
-        // getPeople()
-        //     .then(onFilmLoaded);
+    const getDuration = () => {
+        const beautify = (number) => {
+            return number < 10 
+                ? `0${number}` 
+                : number;
+        };
+
+        let hours = beautify(Math.floor(runningTime / 60));
+        let minutes = beautify(Math.floor(runningTime % 60));
+
+        return `${hours}:${minutes}`;
+    };
+    
+    const duration = getDuration();
+
+    const View = () => {
+        return (
+            <div className="film__wrapper">
+                <img src={image} alt="test" className="film__img"/>
+                <div className="film__main">
+                    <div className="film__header">
+                        <h2 className="film__title">
+                            <span className="film__title-text film__title-text_eng">{title}</span>
+                            <span className="film__title-text film__title-text_jp">({originalTitle})</span>
+                        </h2>
+                        <Link className="film__back" to="/films">Back to all</Link>
+                    </div>
+                    <ul className="film__info">
+                        <li className="film__info-item">
+                            <span className="film__text">Producer: </span>
+                            <span className="film__value">{producer}</span>
+                        </li>
+                        <li className="film__info-item">
+                            <span className="film__text">Director: </span>
+                            <span className="film__value">{director}</span>
+                        </li>
+                        <li className="film__info-item">
+                            <span className="film__text">Released in: </span>
+                            <span className="film__value">{releaseDate}</span>
+                        </li>
+                        <li className="film__info-item">
+                            <span className="film__text">Duration: </span>
+                            <span className="film__value">{runningTime} min./{duration}</span>
+                        </li>
+                        <li className="film__info-item">
+                            <span className="film__text">Rating: </span>
+                            <span className="film__value">{rating}/100</span>
+                        </li>
+                    </ul>
+                    <div className="film__descr">{description}</div>
+                </div>
+            </div>
+        );
     };
 
-    const onFilmLoaded = (film) => {
-        // setFilm(film);
-    }
+    const errorMessage = error ? <ErrorMessage/> : null;
+    const spinner = loading ? <Spinner/> : null;
+    const content = !(loading) && !(error) ? <View/> : null;
 
     return (
-        // <img src={film} alt="#" />
-        <span>тест</span>
+        <section className="film section last-section">
+            <h1 className="sr-only">{title}</h1>
+            <div className="container">
+                {errorMessage}
+                {spinner}
+                {content}
+            </div>
+        </section>
     );
 };
 

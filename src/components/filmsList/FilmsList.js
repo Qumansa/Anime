@@ -30,7 +30,7 @@ const FilmsList = () => {
                 <li 
                     className="films__item"
                     key={film.id}>
-                    <Link to={`/film`}>
+                    <Link className="films__link" to={`/film`}>
                         <img src={film.image} alt={film.title} className="films__img"/>
                         <h3 className="films__title">
                             <span className="films__title-text films__title-text_eng">{film.title}</span>

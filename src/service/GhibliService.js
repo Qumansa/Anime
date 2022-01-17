@@ -32,10 +32,16 @@ const useGhibliService = () => {
 
     const transformFilm = (film) => {
         return {
-            description: film.description ? `${film.description.slice(0, 200)}...` : `The film's description is not available.`, 
+            // description: film.description ? `${film.description.slice(0, 200)}...` : `The film's description is not available.`, 
+            description: film.description,
+            director: film.director,
             image: film.image,
             originalTitle: film.original_title,
             originalTitleRomanised: film.original_title_romanised,
+            producer: film.producer,
+            releaseDate: film.release_date,
+            runningTime: film.running_time,
+            rating: film.rt_score,
             title: film.title,
         };
     };
