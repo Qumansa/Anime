@@ -1,0 +1,14 @@
+@import '../style/_variables'
+@import '../style/_mixins'
+    
+.page404 
+    &__container
+        display: flex
+        flex-direction: column
+        align-items: center
+    &__img
+        max-width: 100%
+        object-fit: cover
+        max-height: 600px
+    &__link
+        @include blueBtn

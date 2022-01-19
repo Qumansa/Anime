@@ -6,6 +6,7 @@ import AppHeader from "../appHeader/AppHeader";
 import MainPage from "../pages/MainPage";
 import FilmsPage from "../pages/FilmsPage";
 import FilmPage from "../pages/FilmPage";
+import Page404 from "../pages/Page404";
 
 const App = () => {
 	return (
@@ -15,6 +16,7 @@ const App = () => {
 				<Route path="/" element={<MainPage/>}/>
 				<Route path="/films" element={<FilmsPage/>}/>
 				<Route path="/film" element={<FilmPage/>}/>
+				<Route path="*" element={<Page404/>}/>
 			</Routes>
 		</Router>
 	);
