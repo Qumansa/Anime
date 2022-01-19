@@ -25,16 +25,18 @@ const FilmsList = () => {
     }, []);
     
     const renderList = (arr) => {
-        const items = arr.map((film, i) => {
+        const items = arr.map((film) => {
+            const {id, image, originalTitle, title} = film;
+
             return (
                 <li 
                     className="films__item"
-                    key={film.id}>
-                    <Link className="films__link" to={`/film`}>
-                        <img src={film.image} alt={film.title} className="films__img"/>
+                    key={id}>
+                    <Link to={`/films/${id}`} className="films__link">
+                        <img src={image} alt={title} className="films__img"/>
                         <h3 className="films__title">
-                            <span className="films__title-text films__title-text_eng">{film.title}</span>
-                            <span className="films__title-text films__title-text_jp">{film.originalTitle}</span>
+                            <span className="films__title-text films__title-text_eng">{title}</span>
+                            <span className="films__title-text films__title-text_jp">{originalTitle}</span>
                         </h3>
                     </Link>
                 </li>

@@ -36,7 +36,6 @@ const RandomFilm = () => {
         } else {
             getFilm(getRandomId(idsList))
                 .then((film) => {
-                    // console.log('устанавливаю film')
                     setFilm(film);
                 });
         }
@@ -49,7 +48,7 @@ const RandomFilm = () => {
 
     // ПОПЫТКА СОЗДАТЬ КОЛЛБЕК
 
-    const {description, image, originalTitle, title} = film;
+    const {description, id, image, originalTitle, title} = film;
 
     const shortDescription = description && description.length > 225 
         ? `${description.slice(0, 225)}...` 
@@ -58,7 +57,7 @@ const RandomFilm = () => {
     const View = () => {
         return (
             <>
-                <Link to="/film" className="info__link">
+                <Link to={`/films/${id}`} className="info__link">
                     <img src={image} alt={title} className="info__img"/>
                 </Link>
                 <div className="info__main">
@@ -91,7 +90,6 @@ const RandomFilm = () => {
                     <span className="random__try-text random__try-text_choose">Or choose another one</span>
                     <button 
                         className="random__try-btn"
-                        // >
                         onClick={updateFilm}>
                         Try it!
                     </button>

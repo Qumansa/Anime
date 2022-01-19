@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import useGhibliService from '../../service/GhibliService';
 import Spinner from '../spinner/Spinner';
@@ -10,19 +10,20 @@ import './film.sass';
 const Film = () => {
     const {error, getFilm, loading} = useGhibliService();
     const [film, setFilm] = useState({});
+    const {id} = useParams();
 
     const onFilmLoaded = (film) => {
         setFilm(film);
     };
 
     const updateFilm = () => {
-        getFilm('2baf70d1-42bb-4437-b551-e5fed5a87abe')
+        getFilm(id)
             .then(onFilmLoaded);
     };
 
     useEffect(() => {
         updateFilm();
-    }, []);
+    }, [id]);
 
     const {description, director, image, originalTitle, producer, releaseDate, runningTime, rating, title} = film;
 
