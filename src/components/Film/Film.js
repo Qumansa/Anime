@@ -50,7 +50,7 @@ const Film = () => {
                     <div className="film__header">
                         <h2 className="film__title">
                             <span className="film__title-text film__title-text_eng">{title}</span>
-                            <span className="film__title-text film__title-text_jp">({originalTitle})</span>
+                            <span className="film__title-text film__title-text_jp">{originalTitle}</span>
                         </h2>
                         <Link className="film__back" to="/films">Back to all</Link>
                     </div>

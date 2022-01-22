@@ -3,10 +3,8 @@ import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import '../../style/_base.sass';
 
 import AppHeader from "../appHeader/AppHeader";
-import MainPage from "../pages/MainPage";
-import FilmsPage from "../pages/FilmsPage";
-import FilmPage from "../pages/FilmPage";
-import Page404 from "../pages/Page404";
+import {CharactersPage, FilmPage, FilmsPage, MainPage, Page404} from '../pages';
+
 
 const App = () => {
 	return (
@@ -14,6 +12,7 @@ const App = () => {
 			<AppHeader/>
 			<Routes>
 				<Route path="/" element={<MainPage/>}/>
+				<Route path="/characters" element={<CharactersPage/>}/>
 				<Route path="/films" element={<FilmsPage/>}/>
 				<Route path="/films/:id" element={<FilmPage/>}/>
 				<Route path="*" element={<Page404/>}/>

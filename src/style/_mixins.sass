@@ -39,3 +39,9 @@
     @include whiteBtn
     color: $white
     background-color: $dodgerBlue
+
+@mixin animateHoverTranslateY
+    transition: transform 0.3s
+    @media (min-width: 992px)
+        &:hover
+            transform: translateY(-15px)

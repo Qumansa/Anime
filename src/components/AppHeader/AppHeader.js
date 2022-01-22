@@ -24,8 +24,8 @@ const AppHeader = () => {
                             <NavLink 
                                 className="header__item-link"
                                 style={({ isActive }) => ({color: isActive ? '#317af9' : 'inherit'})}
-                                to="/people">
-                                People
+                                to="/characters">
+                                Characters
                             </NavLink>
                         </li>
                     </ul>
