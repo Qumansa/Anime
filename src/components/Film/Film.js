@@ -25,7 +25,7 @@ const Film = () => {
         updateFilm();
     }, [id]);
 
-    const {description, director, image, originalTitle, producer, releaseDate, runningTime, rating, title} = film;
+    const {description, director, image, originalTitle, producer, rating, releaseDate, runningTime, title} = film;
 
     const getDuration = () => {
         const beautify = (number) => {
@@ -45,7 +45,7 @@ const Film = () => {
     const View = () => {
         return (
             <div className="film__wrapper">
-                <img src={image} alt="test" className="film__img"/>
+                <img src={image} alt={title} className="film__img"/>
                 <div className="film__main">
                     <div className="film__header">
                         <h2 className="film__title">

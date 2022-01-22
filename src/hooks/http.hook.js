@@ -4,7 +4,7 @@ export const useHttp = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const request = useCallback(async (url, method = 'GET', body = null, headers = {'Content-Type': 'application/json'}) => {
+    const request = useCallback(async ({url, method = 'GET', body = null, headers = {'Content-Type': 'application/json'}, isLoaded = true}) => {
         setLoading(true);
 
         try {
@@ -16,7 +16,9 @@ export const useHttp = () => {
 
             const data = await response.json();
 
-            setLoading(false);
+            if (isLoaded) {
+                setLoading(false);
+            }
             return data;
         } catch(e) {
             setLoading(false);
@@ -27,5 +29,5 @@ export const useHttp = () => {
 
     const clearError = useCallback(() => setError(null), []);
 
-    return {loading, request, error, clearError}
+    return {clearError, error, loading, request, setLoading}
 }
