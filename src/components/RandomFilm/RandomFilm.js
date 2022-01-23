@@ -1,52 +1,43 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import useGhibliService from '../../service/GhibliService';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
+import getRandomId from '../../utils/getRandomId';
+
 import './randomFilm.sass';
 
 let idsList = [];
 
 const RandomFilm = () => {
-    const {error, getFilm, getFilmsList, getIdsList, loading} = useGhibliService(); 
+    const {error, getFilm, getFilms, loading, setLoading} = useGhibliService(); 
     const [film, setFilm] = useState({});
-    // const [idsList, setIdsList] = useState(null);
-    
-    // ХОТЬ КАКОЙ-ТО РАБОЧИЙ ВАРИАНТ.
-    // 1) Без state idsList. Переменная idsList вынесена за компонент. 
-    // 2) idsList записывается один раз. запрос getFilmsList() совершается один раз
-    useEffect(() => { 
-        updateFilm();
-    }, []);
+
+    const onFilmLoaded = (film) => {
+        setFilm(film);
+        setLoading(false);
+    };
 
     const updateFilm = () => {
         if (idsList.length <= 0) {
-            getFilmsList()
-                .then((filmsList) => {
-                    idsList = filmsList.map(film => film.id);
+            getFilms()
+                .then((films) => {
+                    idsList = films.map(film => film.id);
 
                     getFilm(getRandomId(idsList))
-                        .then((film) => {
-                            // console.log('устанавливаю film')
-                            setFilm(film);
-                        });
+                        .then(onFilmLoaded);
                 })
         } else {
             getFilm(getRandomId(idsList))
-                .then((film) => {
-                    setFilm(film);
-                });
+                .then(onFilmLoaded);
         }
     };
 
-    const getRandomId = (arr) => {
-        let random = Math.floor(Math.random() * arr.length);
-        return arr[random];
-    };
-
-    // ПОПЫТКА СОЗДАТЬ КОЛЛБЕК
+    useEffect(() => { 
+        updateFilm();
+    }, []);
 
     const {description, id, image, originalTitle, title} = film;
 

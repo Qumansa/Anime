@@ -1,13 +1,14 @@
 import AppBanner from "../appBanner/AppBanner";
-import FilmsList from "../filmsList/FilmsList";
+import Films from "../films/Films";
 
-const Films = () => {
+const FilmsPage = () => {
     return (
         <>
+            <h1 className="sr-only">Ghibli films</h1>
             <AppBanner title={'the collection of all our animes!'}/>
-            <FilmsList/>
+            <Films/>
         </>
     );
 };
 
-export default Films;
+export default FilmsPage;

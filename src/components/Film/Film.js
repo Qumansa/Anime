@@ -5,6 +5,8 @@ import useGhibliService from '../../service/GhibliService';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
+import getFilmDuration from '../../utils/getFilmDuration';
+
 import './film.sass';
 
 const Film = () => {
@@ -26,21 +28,8 @@ const Film = () => {
     }, [id]);
 
     const {description, director, image, originalTitle, producer, rating, releaseDate, runningTime, title} = film;
-
-    const getDuration = () => {
-        const beautify = (number) => {
-            return number < 10 
-                ? `0${number}` 
-                : number;
-        };
-
-        let hours = beautify(Math.floor(runningTime / 60));
-        let minutes = beautify(Math.floor(runningTime % 60));
-
-        return `${hours}:${minutes}`;
-    };
     
-    const duration = getDuration();
+    const duration = getFilmDuration(runningTime);
 
     const View = () => {
         return (

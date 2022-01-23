@@ -61,6 +61,7 @@ const Characters = () => {
     return (
         <>
             <section className="characters section">
+                <h2 className="sr-only">Characters</h2>
                 <div className="container">
                     {errorMessage}
                     {spinner}

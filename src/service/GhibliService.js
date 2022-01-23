@@ -1,7 +1,7 @@
-import { useHttp } from "../hooks/http.hook";
+import useHttp from "../hooks/http.hook";
 
 const useGhibliService = () => {
-    const {clearError, error, loading, request, setLoading} = useHttp();
+    const {error, loading, request, setLoading} = useHttp();
 
     const _apiBase = 'https://ghibliapi.herokuapp.com/';
 
@@ -31,18 +31,14 @@ const useGhibliService = () => {
         return transformFilm(res);
     };
 
-    const getFilmsList = async () => {
-        const res = await request({url: `${_apiBase}films`});
+    const getFilms = async () => {
+        const res = await request({
+            url: `${_apiBase}films`,
+            isLoaded: false
+        });
         
         return res.map(transformFilms);
     };
-
-    // const getIdsList = async () => {
-    //     const res = await getFilmsList()
-    //         .then(filmsList => filmsList.map(film => film.id));
-
-    //     return res;
-    // };
 
     const transformFilm = (film) => {
         return {
@@ -84,13 +80,11 @@ const useGhibliService = () => {
     };
 
     return {
-        clearError, 
         error, 
         getCharacter,
         getCharacters,
         getFilm,
-        getFilmsList,
-        // getIdsList,
+        getFilms,
         loading, 
         setLoading
     };

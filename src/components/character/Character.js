@@ -27,7 +27,6 @@ const Character = () => {
         const filmId = character.films[0].replace('https://ghibliapi.herokuapp.com/films/', '');
         getFilm(filmId)
             .then(onFilmLoaded);
-        
     };
 
     const updateCharacter = () => {
@@ -86,7 +85,7 @@ const Character = () => {
 
     return (
         <section className="character section last-section">
-            {/* <h1 className="sr-only">{title}</h1> */}
+            <h1 className="sr-only">Character: {transformedName}</h1>
             <div className="container">
                 {errorMessage}
                 {spinner}

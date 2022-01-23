@@ -5,7 +5,6 @@ import '../../style/_base.sass';
 import AppHeader from "../appHeader/AppHeader";
 import {CharacterPage, CharactersPage, FilmPage, FilmsPage, MainPage, Page404} from '../pages';
 
-
 const App = () => {
 	return (
 		<Router>

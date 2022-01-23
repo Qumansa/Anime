@@ -5,19 +5,20 @@ import useGhibliService from '../../service/GhibliService';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
-import './filmsList.sass';
+import './films.sass';
 
-const FilmsList = () => {
-    const {error, getFilmsList, loading} = useGhibliService();
-    const [filmsList, setFilmsList] = useState([]);
+const Films = () => {
+    const {error, getFilms, loading, setLoading} = useGhibliService();
+    const [films, setFilms] = useState([]);
 
-    const onFilmsListLoaded = (newFilmsList) => {
-        setFilmsList(newFilmsList);
+    const onFilmsLoaded = (newFilms) => {
+        setFilms(newFilms);
+        setLoading(false);
     };
 
     const updateList = () => {
-        getFilmsList()
-            .then(onFilmsListLoaded);
+        getFilms()
+            .then(onFilmsLoaded);
     };
 
     useEffect(() => { 
@@ -50,7 +51,7 @@ const FilmsList = () => {
         );
     };
 
-    const list = renderList(filmsList);
+    const list = renderList(films);
 
     const errorMessage = error ? <ErrorMessage/> : null;
     const spinner = loading ? <Spinner/> : null;
@@ -68,4 +69,4 @@ const FilmsList = () => {
     );
 }
 
-export default FilmsList;
+export default Films;
