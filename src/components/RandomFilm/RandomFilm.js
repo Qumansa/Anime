@@ -14,7 +14,7 @@ let idsList = [];
 const RandomFilm = () => {
     const {error, getFilm, getFilms, loading, setLoading} = useGhibliService(); 
     const [film, setFilm] = useState({});
-
+    
     const onFilmLoaded = (film) => {
         setFilm(film);
         setLoading(false);

@@ -12,6 +12,7 @@ const Films = () => {
     const [films, setFilms] = useState([]);
 
     const onFilmsLoaded = (newFilms) => {
+        console.log(newFilms);
         setFilms(newFilms);
         setLoading(false);
     };
