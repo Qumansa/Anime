@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import useGhibliService from '../../service/GhibliService';
-import Spinner from '../spinner/Spinner';
-import ErrorMessage from '../errorMessage/ErrorMessage';
+import useGhibliService from '../service/GhibliService';
+import Spinner from '../components/spinner/Spinner';
+import ErrorMessage from '../components/errorMessage/ErrorMessage';
 
-import getRandomId from '../../utils/getRandomId';
+import getRandomId from '../utils/getRandomId';
 
 import './randomFilm.sass';
 

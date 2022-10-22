@@ -1,4 +1,4 @@
-import RandomFilm from '../RandomFilm/RandomFilm';
+import RandomFilm from '../../randomFilm/RandomFilm';
 import Company from '../company/Company';
 
 const MainPage = () => {

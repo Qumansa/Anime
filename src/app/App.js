@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import '../../style/_base.sass';
+import '../style/_base.sass';
 
-import AppHeader from '../AppHeader/AppHeader';
-import { CharacterPage, CharactersPage, FilmPage, FilmsPage, MainPage, Page404 } from '../pages';
+import AppHeader from '../appHeader/AppHeader';
+import { CharacterPage, CharactersPage, FilmPage, FilmsPage, MainPage, Page404 } from '../components/pages';
 
 const App = () => {
 	return (
