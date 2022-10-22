@@ -24,6 +24,7 @@ const Film = () => {
 
 	useEffect(() => {
 		updateFilm();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [id]);
 
 	const { description, director, image, originalTitle, producer, rating, releaseDate, runningTime, title } = film;
