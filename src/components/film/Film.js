@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import useGhibliService from '../service/GhibliService';
-import Spinner from '../components/spinner/Spinner';
-import ErrorMessage from '../components/errorMessage/ErrorMessage';
+import useGhibliService from '../../service/GhibliService';
+import Spinner from '../spinner/Spinner';
+import ErrorMessage from '../errorMessage/ErrorMessage';
 
-import getFilmDuration from '../utils/getFilmDuration';
+import getFilmDuration from '../../utils/getFilmDuration';
 
 import './film.sass';
 

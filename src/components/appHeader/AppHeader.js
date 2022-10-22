@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 
 import './appHeader.sass';
-import logo from '../resources/img/logo.svg';
+import logo from '../../resources/img/logo.svg';
 
 const AppHeader = () => {
 	return (

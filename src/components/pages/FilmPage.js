@@ -1,5 +1,5 @@
 import AppBanner from '../appBanner/AppBanner';
-import Film from '../../film/Film';
+import Film from '../film/Film';
 
 const FilmPage = () => {
 	return (
