@@ -14,12 +14,12 @@ const Film = () => {
 	const { id } = useParams();
 	const [film, setFilm] = useState({});
 
-	const onFilmLoaded = (film) => {
-		setFilm(film);
-	};
-
 	const updateFilm = () => {
 		getFilm(id).then(onFilmLoaded);
+	};
+
+	const onFilmLoaded = (film) => {
+		setFilm(film);
 	};
 
 	useEffect(() => {
